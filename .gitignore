@@ -68,3 +68,6 @@ test/visual/failures/
 # Regenerated from the source at any time with `graphify update .`, and about
 # 5 MB of machine-specific JSON otherwise.
 graphify-out/
+
+# Internal product brief — not part of the public project.
+PRODUCT.md
