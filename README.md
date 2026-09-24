@@ -133,49 +133,6 @@ server/src/
   utils/          slots, tokens, password hashing, the error contract
 ```
 
-### Decisions worth knowing
-
-**Double booking is prevented by the database, not by application code.** A
-partial unique index on `(doctorId, startsAt)` where `status: 'booked'` is the
-referee. Checking "is this slot free?" and then inserting is two operations,
-and two patients tapping Confirm in the same instant both pass the check.
-There is a test that fires ten simultaneous bookings at one slot and asserts
-exactly one survives.
-
-**Slots are generated, not stored.** A stored slot table has to be back-filled
-forever and goes stale the moment a doctor's hours change. Clinic hours are
-expanded on read and what is booked is subtracted.
-
-**Refresh tokens are opaque and stored hashed.** A JWT refresh token is
-self-validating, which is exactly the wrong property — it cannot be revoked
-before it expires. These are random strings; only a SHA-256 is kept. They
-rotate on every use, and a retired token coming back revokes the whole chain.
-
-**A 401 refreshes and replays, once.** Access tokens live fifteen minutes, so a
-patient who returns after lunch meets an expired one on their next tap. The
-refresh is single-flight: four parallel requests meeting one expired token
-would otherwise fire four rotations with the same token, and three would
-arrive after it had rotated — which the server correctly reads as theft.
-
-**Error codes are a contract.** Every failure is
-`{ "error": { "code", "message" } }`, and the client switches on `code` to
-decide what to *offer* the patient. `account_locked` is what puts a "Reset
-password" button under the error banner. Renaming one is a breaking change.
-
-**The design system is enforced by test.** Feature code may not import the raw
-palette, write a colour literal, or set a font size. Three tests check it.
-Every one of those rules came from a real bug the first dark-mode render turned
-up — a white card that stayed white on a dark page, a gold star hard-coded as
-a hex value. Neither was visible in light mode, and neither would have been
-caught by a type checker.
-
-**Times are the clinic's, not the phone's.** A patient who booked the 09:00
-slot must not open the app in another timezone and read 11:00. Message
-timestamps are the opposite — a message is a thing that happened, so it shows
-in local time.
-
-Full API reference and the server's own notes are in
-[`server/README.md`](server/README.md).
 
 ## Known gaps
 
