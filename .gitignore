@@ -1,0 +1,70 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Widget Preview related
+.widget_preview/
+
+# ---------------------------------------------------------------- this repo
+
+# Secrets. Belt and braces: server/.gitignore covers server/.env too, and on a
+# public repo one missed line is a rotated-credentials afternoon.
+.env
+.env.*
+!.env.example
+
+node_modules/
+
+# `build` here is a symlink to ~/.flutter-build, which `/build/` above does not
+# match — a trailing slash only matches a real directory.
+/build
+
+# Golden *failures* are diff artifacts from the last red run. The goldens
+# themselves (test/visual/out) are the reference images and are committed.
+test/visual/failures/
+
+# Regenerated from the source at any time with `graphify update .`, and about
+# 5 MB of machine-specific JSON otherwise.
+graphify-out/
