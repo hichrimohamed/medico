@@ -1,5 +1,10 @@
 # Medico
 
+<p align="center">
+  <a href="docs/promo/medico-promo.mp4"><img src="docs/promo/medico-promo.gif" width="260" alt="Medico promo"></a><br>
+  <sub>10-second promo — <a href="docs/promo/medico-promo.mp4">watch with sound (MP4)</a></sub>
+</p>
+
 A patient app for booking and managing care with a clinic — find a doctor, see
 when they are free, book, and keep the conversation afterwards.
 
